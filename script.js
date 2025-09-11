@@ -1,131 +1,126 @@
-// DOM Ready
 document.addEventListener('DOMContentLoaded', function() {
+    
+    // !!! महत्वपूर्ण: अपनी गूगल ऐप्स स्क्रिप्ट का URL यहां पेस्ट करें !!!
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxV7oxD1N4pwmsX2stdEizJIApNF7btFRLKSfgXqK7OTV7wlUeU1UPjD739Jcsi4kTW/exec';
+
+    // Modals
+    const leadModal = document.getElementById('leadModal');
+    const paymentModal = document.getElementById('paymentModal');
+    const closeLeadModal = document.getElementById('closeLeadModal');
+    const closePaymentModal = document.getElementById('closePaymentModal');
+
+    // Lead Generation Modal (Free Tests)
+    const openLeadModalButtons = document.querySelectorAll('.open-lead-modal');
+    const leadForm = document.getElementById('leadForm');
+    let currentPdfLink = '';
+
+    openLeadModalButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            currentPdfLink = this.getAttribute('data-pdf-link');
+            leadModal.style.display = 'block';
+        });
+    });
+
+    closeLeadModal.addEventListener('click', () => {
+        leadModal.style.display = 'none';
+    });
+
+    leadForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('leadName').value;
+        const email = document.getElementById('leadEmail').value;
+        const mobile = document.getElementById('leadMobile').value;
+        const submitButton = this.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton.innerHTML;
+        
+        submitButton.disabled = true;
+        submitButton.innerHTML = 'Submitting...';
+
+        // Google Sheet में डेटा भेजें
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('email', email);
+        formData.append('mobile', mobile);
+
+        fetch(GOOGLE_SCRIPT_URL + `?name=${name}&email=${email}&mobile=${mobile}`, {
+            method: 'GET',
+            mode: 'no-cors' // Use 'no-cors' for simple GET requests to Apps Script
+        }).then(() => {
+            // PDF डाउनलोड करें
+            alert('Thank you! Your download will start now.');
+            const a = document.createElement('a');
+            a.href = currentPdfLink;
+            a.download = 'CAExam_Free_Test.pdf';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+
+            // Modal बंद करें और फॉर्म रीसेट करें
+            leadModal.style.display = 'none';
+            leadForm.reset();
+        }).catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
+        }).finally(() => {
+            submitButton.disabled = false;
+            submitButton.innerHTML = originalButtonText;
+        });
+    });
+
+    // Payment Info Modal (Paid Packs)
+    const openPaymentModalButtons = document.querySelectorAll('.open-payment-modal');
+
+    openPaymentModalButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            paymentModal.style.display = 'block';
+        });
+    });
+
+    closePaymentModal.addEventListener('click', () => {
+        paymentModal.style.display = 'none';
+    });
+
+    // किसी भी Modal के बाहर क्लिक करने पर उसे बंद करें
+    window.addEventListener('click', function(event) {
+        if (event.target == leadModal) {
+            leadModal.style.display = 'none';
+        }
+        if (event.target == paymentModal) {
+            paymentModal.style.display = 'none';
+        }
+    });
+
+    // Newsletter Form (Disabled)
+    const newsletterForm = document.querySelector('.newsletter-form');
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // कुछ न करें
+            alert('Thank you for your interest!');
+            this.reset();
+        });
+    }
+
     // Mobile Navigation
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('nav-menu');
-    
     if (hamburger && navMenu) {
-        hamburger.addEventListener('click', function() {
+        hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
         });
     }
-    
-    // Close mobile menu when clicking on a link
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            if (hamburger.classList.contains('active')) {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-            }
-        });
-    });
-    
-    // --- NEW: Free Test & Free Pack Modal Functionality ---
-    const freeTestModal = document.getElementById('freeTestModal');
-    const closeFreeTestModal = document.getElementById('closeFreeTestModal');
-    const freeTestForm = document.getElementById('freeTestForm');
-    const formTestLevelInput = document.getElementById('formTestLevel');
-    const formPdfLinkInput = document.getElementById('formPdfLink');
-    const freeTestTriggerButtons = document.querySelectorAll('.start-test-btn, .open-login');
-
-    freeTestTriggerButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const level = this.getAttribute('data-level');
-            const pdfLink = this.getAttribute('data-pdf-link');
-            
-            formTestLevelInput.value = level;
-            formPdfLinkInput.value = pdfLink;
-            
-            freeTestModal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
         });
     });
 
-    closeFreeTestModal.addEventListener('click', function() {
-        freeTestModal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    });
-    
-    freeTestForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const submitBtn = document.getElementById('submitFreeTest');
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Submitting...';
-
-        // IMPORTANT: Replace this URL with your Google Apps Script Web App URL
-        const googleSheetScriptURL = 'https://script.google.com/macros/s/AKfycbw.../exec'; // REPLACE THIS
-
-        const formData = new FormData(freeTestForm);
-
-        fetch(googleSheetScriptURL, { method: 'POST', body: formData })
-            .then(response => response.json())
-            .then(data => {
-                if(data.result === 'success') {
-                    alert('Success! Your download will start now.');
-                    
-                    // Trigger PDF download
-                    const pdfUrl = formPdfLinkInput.value;
-                    const anchor = document.createElement('a');
-                    anchor.href = pdfUrl;
-                    anchor.download = `CAExam-${formTestLevelInput.value}-Test.pdf`;
-                    document.body.appendChild(anchor);
-                    anchor.click();
-                    document.body.removeChild(anchor);
-
-                    // Close modal and reset form
-                    freeTestModal.style.display = 'none';
-                    document.body.style.overflow = 'auto';
-                    freeTestForm.reset();
-                } else {
-                    throw new Error(data.error || 'Unknown error occurred');
-                }
-            })
-            .catch(error => {
-                console.error('Error!', error.message);
-                alert('An error occurred. Please try again.');
-            })
-            .finally(() => {
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Download Now';
-            });
-    });
-
-    // --- NEW: Payment Modal Functionality ---
-    const paymentModal = document.getElementById('paymentModal');
-    const closePaymentModal = document.getElementById('closePaymentModal');
-    const buyNowButtons = document.querySelectorAll('.buy-now-btn');
-
-    buyNowButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault(); // Prevent navigation if it's a link
-            paymentModal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        });
-    });
-
-    closePaymentModal.addEventListener('click', function() {
-        paymentModal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    });
-
-    // Close modals when clicking outside
-    window.addEventListener('click', function(event) {
-        if (event.target === freeTestModal) {
-            freeTestModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-        if (event.target === paymentModal) {
-            paymentModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-    });
-
-    // Pricing Tabs (Existing functionality)
+    // Pricing Tabs
     const pricingTabs = document.querySelectorAll('.pricing-tab');
     const pricingPanels = document.querySelectorAll('.pricing-panel');
-    
     pricingTabs.forEach(tab => {
         tab.addEventListener('click', function() {
             const target = this.getAttribute('data-target');
@@ -135,24 +130,31 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById(`panel-${target}`).classList.add('active');
         });
     });
-    
-    // Smooth scrolling for anchor links (Existing functionality)
+
+    // Language Switching
+    const languageSelect = document.getElementById('languageSelect');
+    if (languageSelect) {
+        languageSelect.addEventListener('change', function() {
+            switchLanguage(this.value);
+        });
+    }
+    function switchLanguage(lang) {
+        const elements = document.querySelectorAll('[data-en], [data-hi]');
+        elements.forEach(el => {
+            el.textContent = el.getAttribute(`data-${lang}`);
+        });
+    }
+
+    // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+        anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-            
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+            if (targetId.length > 1) {
+                document.querySelector(targetId).scrollIntoView({
+                    behavior: 'smooth'
                 });
             }
         });
     });
-
-    // Other existing functionalities like Testimonial Slider, Language Switching, etc.
-    // ... (Keep the rest of your original JS for these features) ...
 });
