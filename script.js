@@ -1,6 +1,8 @@
-// DOM Ready
+// DOM Ready - Ensures everything loads first
 document.addEventListener('DOMContentLoaded', function() {
-    // Mobile Navigation (unchanged)
+    console.log('DOM Loaded - Script starting'); // Debug: Confirm JS runs
+    
+    // Mobile Navigation
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('nav-menu');
     
@@ -11,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Close mobile menu when clicking on a link (unchanged)
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
         link.addEventListener('click', function() {
@@ -20,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Login Modal (unchanged)
+    // Login Modal
     const loginBtn = document.getElementById('loginBtn');
     const loginModal = document.getElementById('loginModal');
     const closeModal = document.getElementById('closeModal');
@@ -39,7 +40,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Close modal when clicking outside (unchanged)
     window.addEventListener('click', function(event) {
         if (event.target === loginModal) {
             loginModal.style.display = 'none';
@@ -47,41 +47,36 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Tab Switching in Modal (unchanged)
+    // Tab Switching in Modal
     const tabBtns = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
     
     tabBtns.forEach(btn => {
         btn.addEventListener('click', function() {
             const tab = this.getAttribute('data-tab');
-            
-            tabBtns.forEach(btn => btn.classList.remove('active'));
-            tabContents.forEach(content => content.classList.remove('active'));
-            
+            tabBtns.forEach(b => b.classList.remove('active'));
+            tabContents.forEach(c => c.classList.remove('active'));
             this.classList.add('active');
             document.getElementById(tab).classList.add('active');
         });
     });
     
-    // Pricing Tabs (unchanged)
+    // Pricing Tabs
     const pricingTabs = document.querySelectorAll('.pricing-tab');
     const pricingPanels = document.querySelectorAll('.pricing-panel');
     
     pricingTabs.forEach(tab => {
         tab.addEventListener('click', function() {
             const target = this.getAttribute('data-target');
-            
-            pricingTabs.forEach(tab => tab.classList.remove('active'));
-            pricingPanels.forEach(panel => panel.classList.remove('active'));
-            
+            pricingTabs.forEach(t => t.classList.remove('active'));
+            pricingPanels.forEach(p => p.classList.remove('active'));
             this.classList.add('active');
             document.getElementById(`panel-${target}`).classList.add('active');
-            
             document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' });
         });
     });
     
-    // Testimonial Slider (unchanged)
+    // Testimonial Slider
     let currentSlide = 0;
     const slides = document.querySelectorAll('.testimonial-slide');
     const dots = document.querySelectorAll('.dot');
@@ -89,10 +84,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function showSlide(n) {
         slides.forEach(slide => slide.classList.remove('active'));
         dots.forEach(dot => dot.classList.remove('active'));
-        
         if (n >= slides.length) currentSlide = 0;
         if (n < 0) currentSlide = slides.length - 1;
-        
         slides[currentSlide].classList.add('active');
         dots[currentSlide].classList.add('active');
     }
@@ -109,28 +102,57 @@ document.addEventListener('DOMContentLoaded', function() {
         showSlide(currentSlide);
     }, 5000);
     
-    // Free Test/Free Pack Buttons - Open Modal (unchanged)
+    // Free Test/Free Pack Buttons - Open Modal (With Debug)
     const startTestBtns = document.querySelectorAll('.start-test-btn');
     const freePackBtns = document.querySelectorAll('.free-pack-btn');
     const freeFormModal = document.getElementById('freeFormModal');
     const closeFreeModal = document.getElementById('closeFreeModal');
+    const freeForm = document.getElementById('freeForm');
     
-    [startTestBtns, freePackBtns].forEach(btns => {
-        btns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                const level = this.getAttribute('data-level');
-                const freeForm = document.getElementById('freeForm');
-                if (freeForm) {
-                    freeForm.setAttribute('data-level', level || 'General');
-                }
-                freeFormModal.style.display = 'block';
-                document.body.style.overflow = 'hidden';
-            });
+    console.log('Debug - Start Test Buttons found:', startTestBtns.length); // Should be 3
+    console.log('Debug - Free Pack Buttons found:', freePackBtns.length); // Should be 3
+    console.log('Debug - Free Modal found:', !!freeFormModal); // true
+    console.log('Debug - Free Form found:', !!freeForm); // true
+    
+    if (!freeFormModal) {
+        console.error('ERROR: freeFormModal not found in HTML!');
+        return;
+    }
+    
+    // Start Test Buttons
+    startTestBtns.forEach((btn, index) => {
+        console.log('Debug - Attaching to Start Test Btn', index + 1);
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const level = this.getAttribute('data-level');
+            console.log('Debug - Start Test clicked for:', level);
+            
+            freeForm.setAttribute('data-level', level || 'General');
+            freeFormModal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            console.log('Debug - Modal opened for Start Test');
         });
     });
     
-    if (closeFreeModal && freeFormModal) {
+    // Free Pack Buttons
+    freePackBtns.forEach((btn, index) => {
+        console.log('Debug - Attaching to Free Pack Btn', index + 1);
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const level = this.getAttribute('data-level');
+            console.log('Debug - Free Pack clicked for:', level);
+            
+            freeForm.setAttribute('data-level', level || 'General');
+            freeFormModal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            console.log('Debug - Modal opened for Free Pack');
+        });
+    });
+    
+    // Close Free Modal
+    if (closeFreeModal) {
         closeFreeModal.addEventListener('click', function() {
+            console.log('Debug - Close Free Modal clicked');
             freeFormModal.style.display = 'none';
             document.body.style.overflow = 'auto';
         });
@@ -138,57 +160,50 @@ document.addEventListener('DOMContentLoaded', function() {
     
     window.addEventListener('click', function(event) {
         if (event.target === freeFormModal) {
+            console.log('Debug - Outside click closing Free Modal');
             freeFormModal.style.display = 'none';
             document.body.style.overflow = 'auto';
         }
     });
     
-    // UPDATED: Free Form Submission - FIXED for TypeError (Use URLSearchParams + Headers)
-    const freeForm = document.getElementById('freeForm');
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxV7oxD1N4pwmsX2stdEizJIApNF7btFRLKSfgXqK7OTV7wlUeU1UPjD739Jcsi4kTW/exec'; // Your exact URL
+    // Free Form Submission
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxV7oxD1N4pwmsX2stdEizJIApNF7btFRLKSfgXqK7OTV7wlUeU1UPjD739Jcsi4kTW/exec';
     
     if (freeForm) {
         freeForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Collect form data
             const formData = new FormData(this);
             const level = this.getAttribute('data-level') || 'General';
             
-            // Convert to URLSearchParams for application/x-www-form-urlencoded
             const params = new URLSearchParams();
             for (let [key, value] of formData.entries()) {
                 params.append(key, value);
             }
             
-            // Show loading
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
             submitBtn.innerHTML = 'Submitting...';
             submitBtn.disabled = true;
             
-            console.log('Sending data:', params.toString()); // Debug: Form data in console
+            console.log('Debug - Form data:', params.toString());
             
-            // POST with proper headers (fixes e.parameter undefined)
             fetch(SCRIPT_URL, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
                 },
-                body: params // URLSearchParams as body
+                body: params
             })
             .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                console.log('Response status:', response.status); // Debug
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                console.log('Debug - Response status:', response.status);
                 return response.text();
             })
             .then(data => {
-                console.log('Full Response:', data); // Debug: Should show "Success"
+                console.log('Debug - Response data:', data);
                 
                 if (data.trim() === 'Success') {
-                    // Download PDF
                     const downloadLink = document.createElement('a');
                     downloadLink.href = 'https://drive.google.com/uc?export=download&id=1ztptHMUr3KXA_vq8It1bGsDQrc8d5rNG';
                     downloadLink.download = `CA-${level}-Free-Test-Pack.pdf`;
@@ -196,27 +211,26 @@ document.addEventListener('DOMContentLoaded', function() {
                     downloadLink.click();
                     document.body.removeChild(downloadLink);
                     
-                    alert(`Thank you! Your ${level} details submitted successfully. PDF is downloading.`);
+                    alert(`Thank you! ${level} details submitted. PDF downloading.`);
                     freeForm.reset();
                     freeFormModal.style.display = 'none';
                     document.body.style.overflow = 'auto';
                 } else {
-                    alert('Submission failed. Response: ' + data.trim());
+                    alert('Failed: ' + data.trim());
                 }
             })
             .catch(error => {
-                console.error('Fetch Error Details:', error); // Full error in console
-                alert('Error: ' + error.message + '\nCheck console (F12) for details or contact info@caexam.online');
+                console.error('Debug - Error:', error);
+                alert('Error: ' + error.message);
             })
             .finally(() => {
-                // Reset button
                 submitBtn.innerHTML = originalText;
                 submitBtn.disabled = false;
             });
         });
     }
     
-    // Buy Now Modal (unchanged)
+    // Buy Now Modal
     const buyNowBtns = document.querySelectorAll('.buy-now-btn');
     const buyNowModal = document.getElementById('buyNowModal');
     const closeBuyModal = document.getElementById('closeBuyModal');
@@ -245,7 +259,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Coupon Code Copy (unchanged)
+    // Coupon Copy
     const copyCouponBtn = document.getElementById('horizontalCouponBtn');
     if (copyCouponBtn) {
         copyCouponBtn.addEventListener('click', function() {
@@ -253,38 +267,34 @@ document.addEventListener('DOMContentLoaded', function() {
             navigator.clipboard.writeText(couponCode).then(function() {
                 const originalText = this.innerHTML;
                 this.innerHTML = 'Copied!';
-                setTimeout(() => {
-                    this.innerHTML = originalText;
-                }, 2000);
+                setTimeout(() => this.innerHTML = originalText, 2000);
             }.bind(this));
         });
     }
     
-    // Smooth scrolling (unchanged)
+    // Smooth Scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
             const targetId = this.getAttribute('href');
             if (targetId === '#') return;
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
+            const target = document.querySelector(targetId);
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
     });
     
-    // Other Forms (exclude freeForm) (unchanged)
+    // Other Forms
     const authForms = document.querySelectorAll('.auth-form');
     authForms.forEach(form => {
         if (form.id !== 'freeForm') {
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
-                alert('This is a demo. Form submission would be handled by backend.');
+                alert('Demo form');
             });
         }
     });
     
-    // Newsletter: Silently reset (unchanged)
+    // Newsletter Silent Reset
     const newsletterForm = document.querySelector('.newsletter-form');
     if (newsletterForm) {
         newsletterForm.addEventListener('submit', function(e) {
@@ -292,16 +302,16 @@ document.addEventListener('DOMContentLoaded', function() {
             this.reset();
         });
     }
+    
+    console.log('Debug - All scripts loaded'); // End
 });
 
-// Testimonial Slider Dots (unchanged)
+// Testimonial Dots
 function currentSlide(n) {
     const slides = document.querySelectorAll('.testimonial-slide');
     const dots = document.querySelectorAll('.dot');
-    
     slides.forEach(slide => slide.classList.remove('active'));
     dots.forEach(dot => dot.classList.remove('active'));
-    
     if (slides[n - 1]) slides[n - 1].classList.add('active');
     if (dots[n - 1]) dots[n - 1].classList.add('active');
 }
