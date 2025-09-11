@@ -1,6 +1,6 @@
 // DOM Ready
 document.addEventListener('DOMContentLoaded', function() {
-    // Mobile Navigation
+    // Mobile Navigation (unchanged)
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('nav-menu');
     
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Close mobile menu when clicking on a link
+    // Close mobile menu when clicking on a link (unchanged)
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
         link.addEventListener('click', function() {
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Login Modal (original, for other uses)
+    // Login Modal (unchanged)
     const loginBtn = document.getElementById('loginBtn');
     const loginModal = document.getElementById('loginModal');
     const closeModal = document.getElementById('closeModal');
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Close modal when clicking outside
+    // Close modal when clicking outside (unchanged)
     window.addEventListener('click', function(event) {
         if (event.target === loginModal) {
             loginModal.style.display = 'none';
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Tab Switching in Modal (original)
+    // Tab Switching in Modal (unchanged)
     const tabBtns = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
     
@@ -55,17 +55,15 @@ document.addEventListener('DOMContentLoaded', function() {
         btn.addEventListener('click', function() {
             const tab = this.getAttribute('data-tab');
             
-            // Remove active class from all buttons and contents
             tabBtns.forEach(btn => btn.classList.remove('active'));
             tabContents.forEach(content => content.classList.remove('active'));
             
-            // Add active class to current button and content
             this.classList.add('active');
             document.getElementById(tab).classList.add('active');
         });
     });
     
-    // Pricing Tabs (original)
+    // Pricing Tabs (unchanged)
     const pricingTabs = document.querySelectorAll('.pricing-tab');
     const pricingPanels = document.querySelectorAll('.pricing-panel');
     
@@ -73,39 +71,32 @@ document.addEventListener('DOMContentLoaded', function() {
         tab.addEventListener('click', function() {
             const target = this.getAttribute('data-target');
             
-            // Remove active class from all tabs and panels
             pricingTabs.forEach(tab => tab.classList.remove('active'));
             pricingPanels.forEach(panel => panel.classList.remove('active'));
             
-            // Add active class to current tab and panel
             this.classList.add('active');
             document.getElementById(`panel-${target}`).classList.add('active');
             
-            // Smooth scroll to pricing section
             document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' });
         });
     });
     
-    // Testimonial Slider (original)
+    // Testimonial Slider (unchanged)
     let currentSlide = 0;
     const slides = document.querySelectorAll('.testimonial-slide');
     const dots = document.querySelectorAll('.dot');
     
     function showSlide(n) {
-        // Hide all slides
         slides.forEach(slide => slide.classList.remove('active'));
         dots.forEach(dot => dot.classList.remove('active'));
         
-        // Adjust currentSlide index if out of bounds
         if (n >= slides.length) currentSlide = 0;
         if (n < 0) currentSlide = slides.length - 1;
         
-        // Show current slide
         slides[currentSlide].classList.add('active');
         dots[currentSlide].classList.add('active');
     }
     
-    // Manual slide control with dots
     dots.forEach((dot, index) => {
         dot.addEventListener('click', function() {
             currentSlide = index;
@@ -113,42 +104,31 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Auto slide change every 5 seconds
     setInterval(function() {
         currentSlide++;
         showSlide(currentSlide);
     }, 5000);
     
-    // NEW: Free Test Buttons - Open Free Form Modal
+    // Free Test/Free Pack Buttons - Open Modal (unchanged)
     const startTestBtns = document.querySelectorAll('.start-test-btn');
+    const freePackBtns = document.querySelectorAll('.free-pack-btn');
     const freeFormModal = document.getElementById('freeFormModal');
     const closeFreeModal = document.getElementById('closeFreeModal');
     
-    startTestBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const level = this.getAttribute('data-level');
-            if (freeForm) {
-                freeForm.setAttribute('data-level', level); // Store level for PDF
-            }
-            freeFormModal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
+    [startTestBtns, freePackBtns].forEach(btns => {
+        btns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const level = this.getAttribute('data-level');
+                const freeForm = document.getElementById('freeForm');
+                if (freeForm) {
+                    freeForm.setAttribute('data-level', level || 'General');
+                }
+                freeFormModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
         });
     });
     
-    // NEW: Free Pack Buttons - Open Free Form Modal (same logic)
-    const freePackBtns = document.querySelectorAll('.free-pack-btn');
-    freePackBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const level = this.getAttribute('data-level');
-            if (freeForm) {
-                freeForm.setAttribute('data-level', level);
-            }
-            freeFormModal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        });
-    });
-    
-    // Close Free Form Modal
     if (closeFreeModal && freeFormModal) {
         closeFreeModal.addEventListener('click', function() {
             freeFormModal.style.display = 'none';
@@ -163,71 +143,80 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // UPDATED: Free Form Submission - POST to Google Sheet & Download PDF (Fixed for CORS)
+    // UPDATED: Free Form Submission - FIXED for TypeError (Use URLSearchParams + Headers)
     const freeForm = document.getElementById('freeForm');
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxV7oxD1N4pwmsX2stdEizJIApNF7btFRLKSfgXqK7OTV7wlUeU1UPjD739Jcsi4kTW/exec'; // Your URL
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxV7oxD1N4pwmsX2stdEizJIApNF7btFRLKSfgXqK7OTV7wlUeU1UPjD739Jcsi4kTW/exec'; // Your exact URL
     
     if (freeForm) {
         freeForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
+            // Collect form data
             const formData = new FormData(this);
             const level = this.getAttribute('data-level') || 'General';
             
-            // Show loading state
+            // Convert to URLSearchParams for application/x-www-form-urlencoded
+            const params = new URLSearchParams();
+            for (let [key, value] of formData.entries()) {
+                params.append(key, value);
+            }
+            
+            // Show loading
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
             submitBtn.innerHTML = 'Submitting...';
             submitBtn.disabled = true;
             
-            console.log('Sending data:', Object.fromEntries(formData)); // Debug: Check form data in console
+            console.log('Sending data:', params.toString()); // Debug: Form data in console
             
-            // POST request to Apps Script
+            // POST with proper headers (fixes e.parameter undefined)
             fetch(SCRIPT_URL, {
                 method: 'POST',
-                body: formData, // FormData auto-sets Content-Type: multipart/form-data
-                mode: 'no-cors' // Important for CORS bypass if needed (but may hide errors)
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                },
+                body: params // URLSearchParams as body
             })
             .then(response => {
-                // For no-cors, response is opaque; we can't read .text() reliably
-                // But if script returns "Success", we assume it worked (since manual test confirms)
-                console.log('Response received (status:', response.status, ')'); // Debug
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                console.log('Response status:', response.status); // Debug
+                return response.text();
+            })
+            .then(data => {
+                console.log('Full Response:', data); // Debug: Should show "Success"
                 
-                // Proceed to download (assume success if no network error)
-                downloadPDF(level);
-                handleSuccess(submitBtn, originalText);
+                if (data.trim() === 'Success') {
+                    // Download PDF
+                    const downloadLink = document.createElement('a');
+                    downloadLink.href = 'https://drive.google.com/uc?export=download&id=1ztptHMUr3KXA_vq8It1bGsDQrc8d5rNG';
+                    downloadLink.download = `CA-${level}-Free-Test-Pack.pdf`;
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+                    document.body.removeChild(downloadLink);
+                    
+                    alert(`Thank you! Your ${level} details submitted successfully. PDF is downloading.`);
+                    freeForm.reset();
+                    freeFormModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                } else {
+                    alert('Submission failed. Response: ' + data.trim());
+                }
             })
             .catch(error => {
-                console.error('Fetch Error:', error); // Debug: Full error in console
-                alert('Submission error: ' + error.message + '\nPlease check console (F12) or contact info@caexam.online');
+                console.error('Fetch Error Details:', error); // Full error in console
+                alert('Error: ' + error.message + '\nCheck console (F12) for details or contact info@caexam.online');
+            })
+            .finally(() => {
+                // Reset button
                 submitBtn.innerHTML = originalText;
                 submitBtn.disabled = false;
             });
         });
     }
     
-    // Helper: Download PDF
-    function downloadPDF(level) {
-        const downloadLink = document.createElement('a');
-        downloadLink.href = 'https://drive.google.com/uc?export=download&id=1ztptHMUr3KXA_vq8It1bGsDQrc8d5rNG';
-        downloadLink.download = `CA-${level}-Free-Test-Pack.pdf`;
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
-    }
-    
-    // Helper: Handle success
-    function handleSuccess(submitBtn, originalText) {
-        const level = freeForm.getAttribute('data-level') || 'free test';
-        alert(`Thank you! Your ${level} details submitted successfully. PDF is downloading.`);
-        freeForm.reset();
-        freeFormModal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-    }
-    
-    // NEW: Buy Now Buttons - Open Payment Modal (unchanged)
+    // Buy Now Modal (unchanged)
     const buyNowBtns = document.querySelectorAll('.buy-now-btn');
     const buyNowModal = document.getElementById('buyNowModal');
     const closeBuyModal = document.getElementById('closeBuyModal');
@@ -240,19 +229,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    if (closeBuyModal && buyNowModal) {
-        closeBuyModal.addEventListener('click', function() {
-            buyNowModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        });
-    }
-    
-    if (closeBuyBtn && buyNowModal) {
-        closeBuyBtn.addEventListener('click', function() {
-            buyNowModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        });
-    }
+    [closeBuyModal, closeBuyBtn].forEach(el => {
+        if (el && buyNowModal) {
+            el.addEventListener('click', function() {
+                buyNowModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+        }
+    });
     
     window.addEventListener('click', function(event) {
         if (event.target === buyNowModal) {
@@ -261,19 +245,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Coupon Code Copy Functionality (original)
+    // Coupon Code Copy (unchanged)
     const copyCouponBtn = document.getElementById('horizontalCouponBtn');
-    
     if (copyCouponBtn) {
         copyCouponBtn.addEventListener('click', function() {
             const couponCode = 'SAVE100';
-            
-            // Copy to clipboard
             navigator.clipboard.writeText(couponCode).then(function() {
-                // Change button text temporarily
                 const originalText = this.innerHTML;
                 this.innerHTML = 'Copied!';
-                
                 setTimeout(() => {
                     this.innerHTML = originalText;
                 }, 2000);
@@ -281,56 +260,48 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Smooth scrolling for anchor links (original)
+    // Smooth scrolling (unchanged)
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
-            
             const targetId = this.getAttribute('href');
             if (targetId === '#') return;
-            
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         });
     });
     
-    // Form Submissions (original, but exclude freeForm)
+    // Other Forms (exclude freeForm) (unchanged)
     const authForms = document.querySelectorAll('.auth-form');
     authForms.forEach(form => {
         if (form.id !== 'freeForm') {
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
-                alert('This is a demo. Form submission would be handled by backend in actual implementation.');
+                alert('This is a demo. Form submission would be handled by backend.');
             });
         }
     });
     
-    // Newsletter: Silently reset, do nothing (as requested)
+    // Newsletter: Silently reset (unchanged)
     const newsletterForm = document.querySelector('.newsletter-form');
     if (newsletterForm) {
         newsletterForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            this.reset(); // Just reset, no alert or submission
+            this.reset();
         });
     }
 });
 
-// Global function for testimonial slider dots (original)
+// Testimonial Slider Dots (unchanged)
 function currentSlide(n) {
-    // Adjust for zero-based index
     const slides = document.querySelectorAll('.testimonial-slide');
     const dots = document.querySelectorAll('.dot');
     
-    // Hide all slides and remove active class from dots
     slides.forEach(slide => slide.classList.remove('active'));
     dots.forEach(dot => dot.classList.remove('active'));
     
-    // Show selected slide and set active dot
     if (slides[n - 1]) slides[n - 1].classList.add('active');
     if (dots[n - 1]) dots[n - 1].classList.add('active');
 }
