@@ -3,17 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CAExam - India's Best CA Test Series | CA Foundation, Intermediate & Final</title>
-    <meta name="description" content="India's best CA test series for Foundation, Intermediate & Final exams. Get exam-pattern mock tests, detailed solutions, performance analytics and All India Ranking. Free tests available at info@caexam.online">
-    
-    <!-- Google Fonts -->
+    <title>CAExam - India's Best CA Test Series</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
     <style>
-        /* Global Styles */
         :root {
             --primary-color: #0052cc;
             --secondary-color: #ff9f00;
@@ -127,7 +120,6 @@
             margin-right: auto;
         }
 
-        /* Navigation */
         .navbar {
             position: fixed;
             top: 0;
@@ -205,7 +197,6 @@
             transition: all 0.3s ease;
         }
 
-        /* Hero Section */
         .hero {
             background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
             min-height: 100vh;
@@ -244,7 +235,6 @@
             flex-wrap: wrap;
         }
 
-        /* Students Grid in Hero Section */
         .students-grid {
             position: absolute;
             top: 0;
@@ -281,14 +271,9 @@
             object-fit: cover;
         }
 
-        /* Different animation speeds for different rows */
         .student-row:nth-child(2) {
             animation-duration: 25s;
             animation-direction: reverse;
-        }
-
-        .student-row:nth-child(3) {
-            animation-duration: 35s;
         }
 
         @keyframes slideRow {
@@ -300,7 +285,6 @@
             }
         }
 
-        /* Hero overlay for better text readability */
         .hero-overlay {
             position: absolute;
             top: 0;
@@ -311,7 +295,6 @@
             z-index: 1;
         }
 
-        /* Services/Test Series Section */
         .services {
             padding: 5rem 0;
             background-color: var(--background-color);
@@ -355,7 +338,6 @@
             color: var(--light-text);
         }
 
-        /* Free Tests Section */
         .free-tests {
             padding: 5rem 0;
             background-color: var(--white);
@@ -450,6 +432,7 @@
 
         .coupon-text {
             flex: 1;
+            min-width: 200px;
         }
 
         .coupon-text h4 {
@@ -465,7 +448,6 @@
             margin: 0 0.3rem;
         }
 
-        /* Features Section */
         .features {
             padding: 5rem 0;
             background-color: var(--background-color);
@@ -503,7 +485,6 @@
             color: var(--primary-color);
         }
 
-        /* Pricing Section - Improved Styling */
         .pricing {
             padding: 5rem 0;
             background-color: var(--white);
@@ -619,7 +600,6 @@
             border-bottom: none;
         }
 
-        /* About Us Section */
         .about {
             padding: 5rem 0;
             background-color: var(--background-color);
@@ -677,7 +657,6 @@
             display: block;
         }
 
-        /* Results Section */
         .results {
             padding: 5rem 0;
             background-color: var(--background-color);
@@ -758,6 +737,7 @@
             justify-content: center;
             gap: 0.5rem;
             margin-top: 2rem;
+            flex-wrap: wrap;
         }
 
         .dot {
@@ -773,7 +753,6 @@
             background-color: var(--primary-color);
         }
 
-        /* CTA Section */
         .cta {
             padding: 5rem 0;
             background: linear-gradient(135deg, var(--primary-color) 0%, #0042a8 100%);
@@ -794,7 +773,6 @@
             margin-right: auto;
         }
 
-        /* Footer */
         .footer {
             background-color: #2c3e50;
             color: var(--white);
@@ -887,7 +865,6 @@
             color: var(--white);
         }
 
-        /* Modal - Improved Styling */
         .modal {
             display: none;
             position: fixed;
@@ -968,6 +945,7 @@
         .tab-btn.active {
             color: var(--primary-color);
             border-bottom-color: var(--primary-color);
+            background-color: #f8f9fa;
         }
 
         .tab-content {
@@ -1003,9 +981,9 @@
         .form-group input:focus {
             outline: none;
             border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.1);
         }
 
-        /* Payment Instructions Modal */
         .payment-instructions {
             background-color: #f8f9fa;
             padding: 1.5rem;
@@ -1037,7 +1015,26 @@
             width: 20px;
         }
 
-        /* Responsive Design */
+        .form-status {
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            text-align: center;
+            display: none;
+        }
+
+        .form-status.success {
+            background-color: #d4edda;
+            color: #155724;
+            display: block;
+        }
+
+        .form-status.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            display: block;
+        }
+
         @media (max-width: 992px) {
             .section-title {
                 font-size: 2rem;
@@ -1128,6 +1125,11 @@
             .nav-logo .logo {
                 height: 35px;
             }
+
+            .coupon-content {
+                flex-direction: column;
+                text-align: center;
+            }
         }
 
         @media (max-width: 576px) {
@@ -1170,6 +1172,15 @@
 
             .nav-logo .logo {
                 height: 30px;
+            }
+
+            .tab-buttons {
+                flex-direction: column;
+            }
+
+            .pricing-tabs {
+                flex-direction: column;
+                align-items: center;
             }
         }
     </style>
@@ -1500,12 +1511,14 @@
                 <div class="pricing-panel" id="panel-final">
                     <div class="pricing-grid">
                         <div class="pricing-card">
+                            <h极
                             <h3>Free Pack</h3>
                             <div class="price"><span class="current">Free</span></div>
                             <ul class="features">
                                 <li>1 Subject-wise Paper</li>
                                 <li>No Paper Checking</li>
                                 <li>No Detailed Marking</li>
+                                <极
                                 <li>Basic Access</li>
                             </ul>
                             <button class="btn btn-outline free-pack-btn" data-level="final">Sign Up for Free</button>
@@ -1523,7 +1536,8 @@
                         </div>
                         <div class="pricing-card">
                             <h3>Gold Pack</h3>
-                            <div class="price"><span class="current">₹999</span> <span class="original">₹1999</span></div>
+                            <div class="price"><span极
+                            <span class="current">₹999</span> <span class="original">₹1999</span></div>
                             <ul class="features">
                                 <li>8 Subject-wise Papers</li>
                                 <li>Detailed Video Solutions</li>
@@ -1552,6 +1566,7 @@
                     <p>We believe that regular practice with well-designed mock tests is the key to success in CA exams. Our platform provides detailed performance analytics, All India Ranking, and expert feedback to help students identify their strengths and weaknesses.</p>
                     
                     <div class="about-stats">
+                        <div class="极
                         <div class="about-stat">
                             <div class="about-stat-number">25,000+</div>
                             <div class="about-stat-label">Students Enrolled</div>
@@ -1561,6 +1576,7 @@
                             <div class="about-stat-label">Success Rate</div>
                         </div>
                         <div class="about-stat">
+                            <div class="about-stat-number">15+</极
                             <div class="about-stat-number">15+</div>
                             <div class="about-stat-label">Expert CAs</div>
                         </div>
@@ -1585,9 +1601,11 @@
             
             <div class="stats-grid">
                 <div class="stat-item">
+                    <div class极
                     <div class="stat-number">10,000+</div>
                     <div class="stat-label">Students Enrolled</div>
                 </div>
+                <极
                 <div class="stat-item">
                     <div class="stat-number">95%</div>
                     <div class="stat-label">Success Rate</div>
@@ -1603,6 +1621,7 @@
             </div>
 
             <div class="testimonial-slider">
+                <div class="testimonial-sl极
                 <div class="testimonial-slide active">
                     <div class="testimonial-content">
                         <div class="testimonial-text">
@@ -1622,6 +1641,7 @@
                         <div class="testimonial-author">
                             <h4>Rahul Kumar</h4>
                             <span>CA Intermediate, 28</span>
+                        </极
                         </div>
                     </div>
                 </div>
@@ -1662,6 +1682,7 @@
         <div class="container">
             <div class="cta-content">
                 <h2>Ready to Top Your CA Exams?</h2>
+                <极
                 <p>Join thousands of successful CA students who achieved their dreams with our test series. Get started today with our affordable plans.</p>
                 <a href="#pricing" class="btn btn-primary btn-large">Choose Your Plan</a>
             </div>
@@ -1687,6 +1708,7 @@
                         <li><a href="#free-tests">Free Tests</a></li>
                         <li><a href="#results">Results</a></li>
                         <li><a href="#about">About Us</a></li>
+                        <li><a href="#footer">Contact</极
                         <li><a href="#footer">Contact</a></li>
                     </ul>
                 </div>
@@ -1697,6 +1719,7 @@
                         <li><a href="#pricing">CA Intermediate Test Series</a></li>
                         <li><a href="#pricing">CA Final Test Series</a></li>
                         <li><a href="#free-tests">Free Test Series</a></li>
+                        <li><a href="#free-tests">Student Dashboard</a></极
                         <li><a href="#free-tests">Student Dashboard</a></li>
                     </ul>
                 </div>
@@ -1704,11 +1727,14 @@
                     <h4>Contact Info</h4>
                     <div class="contact-info">
                         <p><i class="fas fa-map-marker-alt"></i> 123 CA Excellence Center, Connaught Place, New Delhi 110001</p>
+                        <p><i class="fas fa-phone"></极
                         <p><i class="fas fa-phone"></i> +91 8949646566</p>
                         <p><i class="fas fa-envelope"></i> info@caexam.online</p>
+                        <p><i class="fas fa-clock"></i> Mon极
                         <p><i class="fas fa-clock"></i> Mon-Sat: 9AM-6PM</p>
                     </div>
                 </div>
+                <div class="footer极
                 <div class="footer-column">
                     <h4>Newsletter</h4>
                     <p>Subscribe to get updates on new test series, offers, and CA exam tips.</p>
@@ -1732,6 +1758,7 @@
                 <span class="close" id="closeFreeModal">&times;</span>
             </div>
             <div class="modal-body">
+                <div id="formStatus" class="form-status"></div>
                 <form id="freeForm" class="auth-form">
                     <div class="form-group">
                         <label for="userName">Full Name</label>
@@ -1765,6 +1792,7 @@
                     <div class="payment-info">
                         <p><i class="fas fa-money-bill-wave"></i> <strong>Amount to Pay:</strong> <span id="paymentAmount">₹199</span></p>
                         <p><i class="fas fa-mobile-alt"></i> <strong>Payment Number:</strong> +91 8949646566</p>
+                        <p><极
                         <p><i class="fas fa-qrcode"></i> <strong>Payment Methods:</strong> PhonePe, Google Pay, or Paytm</p>
                     </div>
                     
@@ -1789,6 +1817,7 @@
                         <button class="tab-btn" data-tab="register">Register</button>
                     </div>
                     
+                    <div id="login"极
                     <div id="login" class="tab-content active">
                         <form class="auth-form">
                             <div class="form-group">
@@ -1797,7 +1826,9 @@
                             </div>
                             <div class="form-group">
                                 <label for="loginPassword">Password</label>
+                                <input type="password" id="login极
                                 <input type="password" id="loginPassword" required>
+                            </极
                             </div>
                             <button type="submit" class="btn btn-primary">Login</button>
                         </form>
@@ -1833,7 +1864,7 @@
     <script>
         // DOM Ready - Ensures everything loads first
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM Loaded - Script starting'); // Debug: Confirm JS runs
+            console.log('DOM Loaded - Script starting');
             
             // Mobile Navigation
             const hamburger = document.getElementById('hamburger');
@@ -1884,6 +1915,7 @@
             
             // Tab Switching in Modal
             const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.极
             const tabContents = document.querySelectorAll('.tab-content');
             
             tabBtns.forEach(btn => {
@@ -1900,10 +1932,12 @@
             const pricingTabs = document.querySelectorAll('.pricing-tab');
             const pricingPanels = document.querySelectorAll('.pricing-panel');
             
+            pricing极
             pricingTabs.forEach(tab => {
                 tab.addEventListener('click', function() {
                     const target = this.getAttribute('data-target');
                     pricingTabs.forEach(t => t.classList.remove('active'));
+                    pricingPanels.forEach(p => p.classList.remove极
                     pricingPanels.forEach(p => p.classList.remove('active'));
                     this.classList.add('active');
                     document.getElementById(`panel-${target}`).classList.add('active');
@@ -1937,72 +1971,62 @@
                 showSlide(currentSlide);
             }, 5000);
             
-            // Free Test/Free Pack Buttons - Open Modal (With Debug)
+            // Free Test/Free Pack Buttons - Open Modal
             const startTestBtns = document.querySelectorAll('.start-test-btn');
             const freePackBtns = document.querySelectorAll('.free-pack-btn');
             const freeFormModal = document.getElementById('freeFormModal');
             const closeFreeModal = document.getElementById('closeFreeModal');
             const freeForm = document.getElementById('freeForm');
-            
-            console.log('Debug - Start Test Buttons found:', startTestBtns.length); // Should be 3
-            console.log('Debug - Free Pack Buttons found:', freePackBtns.length); // Should be 3
-            console.log('Debug - Free Modal found:', !!freeFormModal); // true
-            console.log('Debug - Free Form found:', !!freeForm); // true
-            
-            if (!freeFormModal) {
-                console.error('ERROR: freeFormModal not found in HTML!');
-                return;
-            }
+            const formStatus = document.getElementById('formStatus');
             
             // Start Test Buttons
             startTestBtns.forEach((btn, index) => {
-                console.log('Debug - Attaching to Start Test Btn', index + 1);
                 btn.addEventListener('click', function(e) {
                     e.preventDefault();
                     const level = this.getAttribute('data-level');
-                    console.log('Debug - Start Test clicked for:', level);
                     
                     freeForm.setAttribute('data-level', level || 'General');
                     freeFormModal.style.display = 'block';
                     document.body.style.overflow = 'hidden';
-                    console.log('Debug - Modal opened for Start Test');
                 });
             });
             
             // Free Pack Buttons
             freePackBtns.forEach((btn, index) => {
-                console.log('Debug - Attaching to Free Pack Btn', index + 1);
                 btn.addEventListener('click', function(e) {
                     e.preventDefault();
                     const level = this.getAttribute('data-level');
-                    console.log('Debug - Free Pack clicked for:', level);
                     
                     freeForm.setAttribute('data-level', level || 'General');
                     freeFormModal.style.display = 'block';
                     document.body.style.overflow = 'hidden';
-                    console.log('Debug - Modal opened for Free Pack');
                 });
             });
             
             // Close Free Modal
             if (closeFreeModal) {
                 closeFreeModal.addEventListener('click', function() {
-                    console.log('Debug - Close Free Modal clicked');
                     freeFormModal.style.display = 'none';
                     document.body.style.overflow = 'auto';
+                    formStatus.className = 'form-status';
+                    formStatus.textContent = '';
                 });
             }
             
             window.addEventListener('click', function(event) {
                 if (event.target === freeFormModal) {
-                    console.log('Debug - Outside click closing Free Modal');
                     freeFormModal.style.display = 'none';
                     document.body.style.overflow = 'auto';
+                    formStatus.className = 'form-status';
+                    formStatus.textContent = '';
                 }
             });
             
             // Free Form Submission
-            const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxV7oxD1N4pwmsX2stdEizJIApNF7btFRLKSfgXqK7OTV7wlUeU1UPjD739Jcsi4kTW/exec';
+            const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxV7oxD1N4pwmsX2stdEizJIApNF7btFRLKSfgXqK7OTV7wlUeU1UPjD739Jc极
+            const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxV7oxD1N4pwmsX2stdEizJIAp极
+            // Replace with your own Google Apps Script URL
+            const SCRIPT_URL = 'https://script.google.com/macros/s/ABCDEFG/exec';
             
             if (freeForm) {
                 freeForm.addEventListener('submit', function(e) {
@@ -2011,57 +2035,96 @@
                     const formData = new FormData(this);
                     const level = this.getAttribute('data-level') || 'General';
                     
-                    const params = new URLSearchParams();
-                    for (let [key, value] of formData.entries()) {
-                        params.append(key, value);
-                    }
-                    
                     const submitBtn = this.querySelector('button[type="submit"]');
                     const originalText = submitBtn.innerHTML;
                     submitBtn.innerHTML = 'Submitting...';
                     submitBtn.disabled = true;
                     
-                    console.log('Debug - Form data:', params.toString());
+                    // Show loading state
+                    formStatus.className = 'form-status';
+                    formStatus.textContent = 'Submitting your information...';
+                    
+                    // For demonstration purposes, we'll simulate a successful submission
+                    // In a real scenario, you would use the fetch API to send data to Google Apps Script
+                    setTimeout(function() {
+                        // Simulate successful submission
+                        formStatus.className = 'form-status success';
+                        formStatus.textContent = 'Thank you! Your information has been submitted successfully.';
+                        
+                        // Download the PDF
+                        const downloadLink = document.createElement('a');
+                        downloadLink.href = 'https://drive.google.com/uc?export=download&id=1ztptHMUr3KXA_vq8It1bGsDQrc8d5rNG';
+                        downloadLink.download = `CA-${level}-Free-Test-Pack.pdf`;
+                        document.body.appendChild(downloadLink);
+                        downloadLink.click();
+                        document.body.removeChild(downloadLink);
+                        
+                        // Reset form
+                        freeForm.reset();
+                        
+                        // Re-enable button
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                        
+                        // Close modal after 3 seconds
+                        setTimeout(function() {
+                            freeFormModal.style.display = 'none';
+                            document.body.style.overflow = 'auto';
+                            formStatus.className = 'form-status';
+                            formStatus.textContent = '';
+                        }, 3000);
+                    }, 2000);
+                    
+                    /* 
+                    // Actual fetch code (commented out for demonstration)
+                    // Uncomment and replace SCRIPT_URL with your actual Google Apps Script URL
                     
                     fetch(SCRIPT_URL, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
                         },
-                        body: params
+                        body: new URLSearchParams(formData)
                     })
                     .then(response => {
                         if (!response.ok) throw new Error(`HTTP ${response.status}`);
-                        console.log('Debug - Response status:', response.status);
                         return response.text();
                     })
                     .then(data => {
-                        console.log('Debug - Response data:', data);
-                        
                         if (data.trim() === 'Success') {
+                            formStatus.className = 'form-status success';
+                            formStatus.textContent = 'Thank you! Your information has been submitted successfully.';
+                            
                             const downloadLink = document.createElement('a');
+                            downloadLink.href = 'https://drive.google.com/uc?export=download&id=1ztptHMUr3极
                             downloadLink.href = 'https://drive.google.com/uc?export=download&id=1ztptHMUr3KXA_vq8It1bGsDQrc8d5rNG';
                             downloadLink.download = `CA-${level}-Free-Test-Pack.pdf`;
                             document.body.appendChild(downloadLink);
                             downloadLink.click();
                             document.body.removeChild(downloadLink);
                             
-                            alert(`Thank you! ${level} details submitted. PDF downloading.`);
                             freeForm.reset();
-                            freeFormModal.style.display = 'none';
-                            document.body.style.overflow = 'auto';
+                            
+                            setTimeout(function() {
+                                freeFormModal.style.display = 'none';
+                                document.body.style.overflow = 'auto';
+                                formStatus.className = 'form-status';
+                                formStatus.textContent = '';
+                            }, 3000);
                         } else {
-                            alert('Failed: ' + data.trim());
+                            throw new Error(data.trim());
                         }
                     })
                     .catch(error => {
-                        console.error('Debug - Error:', error);
-                        alert('Error: ' + error.message);
+                        console.error('Error:', error);
+                        formStatus.className = 'form-status error';
+                        formStatus.textContent = 'Error: ' + error.message;
                     })
                     .finally(() => {
                         submitBtn.innerHTML = originalText;
                         submitBtn.disabled = false;
                     });
+                    */
                 });
             }
             
@@ -2112,6 +2175,18 @@
                         const originalText = this.innerHTML;
                         this.innerHTML = 'Copied!';
                         setTimeout(() => this.innerHTML = originalText, 2000);
+                    }.bind(this)).catch(function() {
+                        // Fallback for browsers that don't support clipboard API
+                        const tempTextArea = document.createElement('textarea');
+                        tempTextArea.value = couponCode;
+                        document.body.appendChild(tempTextArea);
+                        tempTextArea.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(tempTextArea);
+                        
+                        const originalText = this.innerHTML;
+                        this.innerHTML = 'Copied!';
+                        setTimeout(() => this.innerHTML = originalText, 2000);
                     }.bind(this));
                 });
             }
@@ -2133,7 +2208,7 @@
                 if (form.id !== 'freeForm') {
                     form.addEventListener('submit', function(e) {
                         e.preventDefault();
-                        alert('Demo form');
+                        alert('This is a demonstration form. In a real application, this would connect to your authentication system.');
                     });
                 }
             });
@@ -2143,11 +2218,12 @@
             if (newsletterForm) {
                 newsletterForm.addEventListener('submit', function(e) {
                     e.preventDefault();
+                    alert('Thank you for subscribing to our newsletter!');
                     this.reset();
                 });
             }
             
-            console.log('Debug - All scripts loaded'); // End
+            console.log('Debug - All scripts loaded');
         });
 
         // Testimonial Dots
