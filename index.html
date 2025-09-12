@@ -12,15 +12,1174 @@
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #0052cc;
+            --secondary-color: #ff9f00;
+            --accent-color: #4caf50;
+            --background-color: #f8f9fa;
+            --text-color: #212529;
+            --light-text: #6c757d;
+            --white: #ffffff;
+            --light-gray: #e9ecef;
+            --border-color: #dee2e6;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-weight: 500;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-primary {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            border-color: var(--secondary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #e58a00;
+            border-color: #e58a00;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .btn-large {
+            padding: 16px 32px;
+            font-size: 1.1rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--light-text);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 0.8rem 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-logo .logo {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--text-color);
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .login-btn {
+            padding: 8px 16px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background-color: #0042a8;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-color);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            padding-top: 80px;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Students Grid in Hero Section */
+        .students-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            z-index: 0;
+            opacity: 0.4;
+            overflow: hidden;
+        }
+
+        .student-row {
+            display: flex;
+            justify-content: center;
+            animation: slideRow 30s linear infinite;
+            margin: 5px 0;
+        }
+
+        .student-photo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 8px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .student-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Different animation speeds for different rows */
+        .student-row:nth-child(2) {
+            animation-duration: 25s;
+            animation-direction: reverse;
+        }
+
+        .student-row:nth-child(3) {
+            animation-duration: 35s;
+        }
+
+        @keyframes slideRow {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        /* Hero overlay for better text readability */
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 82, 204, 0.85) 0%, rgba(0, 66, 168, 0.9) 100%);
+            z-index: 1;
+        }
+
+        /* Services/Test Series Section */
+        .services {
+            padding: 5rem 0;
+            background-color: var(--background-color);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .service-card p {
+            margin-bottom: 1.5rem;
+            color: var(--light-text);
+        }
+
+        /* Free Tests Section */
+        .free-tests {
+            padding: 5rem 0;
+            background-color: var(--white);
+        }
+
+        .test-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .test-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .test-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .test-card-header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .test-card-header h3 {
+            font-size: 1.3rem;
+            margin: 0;
+        }
+
+        .test-card-body {
+            padding: 1.5rem;
+        }
+
+        .test-card-body p {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .test-card-body ul {
+            margin-bottom: 1.5rem;
+        }
+
+        .test-card-body li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--light-gray);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .test-card-body li:before {
+            content: "✓";
+            color: var(--success-color);
+            position: absolute;
+            left: 0;
+        }
+
+        .test-card-footer {
+            padding: 0 1.5rem 1.5rem;
+            text-align: center;
+        }
+
+        .coupon-banner-horizontal {
+            background: linear-gradient(135deg, #ff9f00 0%, #ff6b00 100%);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 3rem;
+            color: var(--white);
+        }
+
+        .coupon-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .coupon-icon {
+            font-size: 2rem;
+        }
+
+        .coupon-text {
+            flex: 1;
+        }
+
+        .coupon-text h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        .coupon-code {
+            background-color: var(--white);
+            color: var(--secondary-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+            background-color: var(--background-color);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        /* Pricing Section - Improved Styling */
+        .pricing {
+            padding: 5rem 0;
+            background-color: var(--white);
+        }
+
+        .pricing-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .pricing-tab {
+            padding: 12px 24px;
+            background-color: var(--light-gray);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-tab.active {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .pricing-panels {
+            margin-top: 2rem;
+        }
+
+        .pricing-panel {
+            display: none;
+        }
+
+        .pricing-panel.active {
+            display: block;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .pricing-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .pricing-card.highlight {
+            border-color: var(--secondary-color);
+            transform: scale(1.03);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background-color: var(--secondary-color);
+            color: var(--white);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .price {
+            margin-bottom: 1.5rem;
+        }
+
+        .current {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .original {
+            text-decoration: line-through;
+            color: var(--light-text);
+            margin-left: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .features {
+            margin-bottom: 2rem;
+            flex-grow: 1;
+        }
+
+        .features li {
+            padding: 0.7rem 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .features li:last-child {
+            border-bottom: none;
+        }
+
+        /* About Us Section */
+        .about {
+            padding: 5rem 0;
+            background-color: var(--background-color);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--light-text);
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .about-stat {
+            text-align: center;
+        }
+
+        .about-stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .about-stat-label {
+            color: var(--light-text);
+        }
+
+        .about-image {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Results Section */
+        .results {
+            padding: 5rem 0;
+            background-color: var(--background-color);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-item {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--light-text);
+            font-weight: 500;
+        }
+
+        .testimonial-slider {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .testimonial-slide {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .testimonial-slide.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .testimonial-content {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .testimonial-text {
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            color: var(--text-color);
+        }
+
+        .testimonial-author h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .testimonial-author span {
+            color: var(--light-text);
+        }
+
+        .testimonial-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .dot.active {
+            background-color: var(--primary-color);
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #0042a8 100%);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .cta-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #2c3e50;
+            color: var(--white);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+
+        .footer-logo .logo {
+            height: 40px;
+            margin-bottom: 1rem;
+            width: auto;
+        }
+
+        .footer-logo p {
+            color: #bdc3c7;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column ul li a {
+            color: #bdc3c7;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--white);
+        }
+
+        .contact-info p {
+            margin-bottom: 1rem;
+            color: #bdc3c7;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .newsletter-form button {
+            padding: 10px 15px;
+            background-color: var(--secondary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #34495e;
+            color: #bdc3c7;
+        }
+
+        .footer-bottom a {
+            color: #bdc3c7;
+            transition: color 0.3s ease;
+        }
+
+        .footer-bottom a:hover {
+            color: var(--white);
+        }
+
+        /* Modal - Improved Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1100;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            margin: 50px auto;
+            animation: modalFadeIn 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            color: var(--white);
+        }
+
+        .close {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--white);
+        }
+
+        .close:hover {
+            color: var(--light-gray);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .tab-container {
+            margin-top: 1rem;
+        }
+
+        .tab-buttons {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--light-text);
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-btn.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .auth-form {
+            margin-top: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        /* Payment Instructions Modal */
+        .payment-instructions {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .payment-instructions p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .payment-info {
+            background-color: var(--white);
+            padding: 1rem;
+            border-radius: 4px;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .payment-info p {
+            margin: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .payment-info i {
+            color: var(--primary-color);
+            width: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: var(--white);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 2rem;
+                transition: left 0.3s ease;
+                z-index: 999;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .hamburger {
+                display: flex;
+            }
+            
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-card.highlight {
+                transform: scale(1);
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .nav-logo .logo {
+                height: 35px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 10px;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .test-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 20px auto;
+            }
+
+            .about-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-logo .logo {
+                height: 30px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation Bar -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <img src="images/logo.png" alt="CAExam - Best CA Test Series" class="logo">
+                <img src="https://placehold.co/150x40/0052cc/white?text=CAExam" alt="CAExam - Best CA Test Series" class="logo">
             </div>
             <div class="nav-menu" id="nav-menu">
                 <a href="#home" class="nav-link">Home</a>
@@ -56,18 +1215,18 @@
         <!-- Student Photos Grid in Background -->
         <div class="students-grid">
             <div class="student-row">
-                <div class="student-photo"><img src="images/students/student1.jpg" alt="CA Aspirant Success" loading="lazy"></div>
-                <div class="student-photo"><img src="images/students/student2.jpg" alt="CA Aspirant Success" loading="lazy"></div>
-                <div class="student-photo"><img src="images/students/student3.jpg" alt="CA Aspirant Success" loading="lazy"></div>
-                <div class="student-photo"><img src="images/students/student4.jpg" alt="CA Aspirant Success" loading="lazy"></div>
-                <div class="student-photo"><img src="images/students/student5.jpg" alt="CA Aspirant Success" loading="lazy"></div>
+                <div class="student-photo"><img src="https://placehold.co/60x60/0052cc/white?text=S1" alt="CA Aspirant Success" loading="lazy"></div>
+                <div class="student-photo"><img src="https://placehold.co/60x60/0052cc/white?text=S2" alt="CA Aspirant Success" loading="lazy"></div>
+                <div class="student-photo"><img src="https://placehold.co/60x60/0052cc/white?text=S3" alt="CA Aspirant Success" loading="lazy"></div>
+                <div class="student-photo"><img src="https://placehold.co/60x60/0052cc/white?text=S4" alt="CA Aspirant Success" loading="lazy"></div>
+                <div class="student-photo"><img src="https://placehold.co/60x60/0052cc/white?text=S5" alt="CA Aspirant Success" loading="lazy"></div>
             </div>
             <div class="student-row">
-                <div class="student-photo"><img src="images/students/student6.jpg" alt="CA Aspirant Success" loading="lazy"></div>
-                <div class="student-photo"><img src="images/students/student7.jpg" alt="CA Aspirant Success" loading="lazy"></div>
-                <div class="student-photo"><img src="images/students/student8.jpg" alt="CA Aspirant Success" loading="lazy"></div>
-                <div class="student-photo"><img src="images/students/student9.jpg" alt="CA Aspirant Success" loading="lazy"></div>
-                <div class="student-photo"><img src="images/students/student10.jpg" alt="CA Aspirant Success" loading="lazy"></div>
+                <div class="student-photo"><img src="https://placehold.co/60x60/0052cc/white?text=S6" alt="CA Aspirant Success" loading="lazy"></div>
+                <div class="student-photo"><img src="https://placehold.co/60x60/0052cc/white?text=S7" alt="CA Aspirant Success" loading="lazy"></div>
+                <div class="student-photo"><img src="https://placehold.co/60x60/0052cc/white?text=S8" alt="CA Aspirant Success" loading="lazy"></div>
+                <div class="student-photo"><img src="https://placehold.co/60x60/0052cc/white?text=S9" alt="CA Aspirant Success" loading="lazy"></div>
+                <div class="student-photo"><img src="https://placehold.co/60x60/0052cc/white?text=S10" alt="CA Aspirant Success" loading="lazy"></div>
             </div>
         </div>
         
@@ -382,6 +1541,42 @@
         </div>
     </section>
 
+    <!-- About Us Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About CAExam</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>India's Leading CA Test Series Platform</h2>
+                    <p>CAExam was founded with a mission to provide high-quality, affordable test series for CA aspirants across India. Our team of experienced Chartered Accountants and educators design test series that closely match the actual ICAI exam pattern.</p>
+                    <p>We believe that regular practice with well-designed mock tests is the key to success in CA exams. Our platform provides detailed performance analytics, All India Ranking, and expert feedback to help students identify their strengths and weaknesses.</p>
+                    
+                    <div class="about-stats">
+                        <div class="about-stat">
+                            <div class="about-stat-number">25,000+</div>
+                            <div class="about-stat-label">Students Enrolled</div>
+                        </div>
+                        <div class="about-stat">
+                            <div class="about-stat-number">95%</div>
+                            <div class="about-stat-label">Success Rate</div>
+                        </div>
+                        <div class="about-stat">
+                            <div class="about-stat-number">15+</div>
+                            <div class="about-stat-label">Expert CAs</div>
+                        </div>
+                        <div class="about-stat">
+                            <div class="about-stat-number">3 Years</div>
+                            <div class="about-stat-label">Experience</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="CAExam Team">
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Results Section -->
     <section id="results" class="results">
         <div class="container">
@@ -452,84 +1647,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="testimonial-slide">
-                    <div class="testimonial-content">
-                        <div class="testimonial-text">
-                            <p>"The CA Foundation test series was exactly what I needed to build my confidence. The detailed solutions and All India Ranking helped me understand where I stood compared to other aspirants."</p>
-                        </div>
-                        <div class="testimonial-author">
-                            <h4>Sneha Reddy</h4>
-                            <span>CA Foundation, 89</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-slide">
-                    <div class="testimonial-content">
-                        <div class="testimonial-text">
-                            <p>"As a working professional, the mobile app access was a game-changer for me. I could take tests during my commute and review solutions during breaks. Highly recommended for busy students!"</p>
-                        </div>
-                        <div class="testimonial-author">
-                            <h4>Arjun Mehta</h4>
-                            <span>CA Final, 52</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-slide">
-                    <div class="testimonial-content">
-                        <div class="testimonial-text">
-                            <p>"The personalized feedback from experienced CAs was invaluable. They pointed out mistakes I didn't even realize I was making. This helped me improve my score significantly in the actual exam."</p>
-                        </div>
-                        <div class="testimonial-author">
-                            <h4>Neha Gupta</h4>
-                            <span>CA Intermediate, 37</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-slide">
-                    <div class="testimonial-content">
-                        <div class="testimonial-text">
-                            <p>"The video solutions in the Gold pack were worth every penny. Seeing complex problems solved step-by-step made difficult concepts much easier to understand. My confidence increased tremendously."</p>
-                        </div>
-                        <div class="testimonial-author">
-                            <h4>Rajiv Malhotra</h4>
-                            <span>CA Final, 23</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-slide">
-                    <div class="testimonial-content">
-                        <div class="testimonial-text">
-                            <p>"The test interface was so similar to the actual CA exam that I felt completely prepared on exam day. The practice with the timer helped me manage my time effectively during the real exam."</p>
-                        </div>
-                        <div class="testimonial-author">
-                            <h4>Kavita Joshi</h4>
-                            <span>CA Foundation, 56</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-slide">
-                    <div class="testimonial-content">
-                        <div class="testimonial-text">
-                            <p>"I was struggling with taxation concepts until I joined this test series. The subject-wise tests and detailed solutions helped me master difficult topics. I went from failing to scoring 72 marks!"</p>
-                        </div>
-                        <div class="testimonial-author">
-                            <h4>Amit Verma</h4>
-                            <span>CA Intermediate, 44</span>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="testimonial-dots">
                 <span class="dot active" onclick="currentSlide(1)"></span>
                 <span class="dot" onclick="currentSlide(2)"></span>
                 <span class="dot" onclick="currentSlide(3)"></span>
                 <span class="dot" onclick="currentSlide(4)"></span>
-                <span class="dot" onclick="currentSlide(5)"></span>
-                <span class="dot" onclick="currentSlide(6)"></span>
-                <span class="dot" onclick="currentSlide(7)"></span>
-                <span class="dot" onclick="currentSlide(8)"></span>
-                <span class="dot" onclick="currentSlide(9)"></span>
-                <span class="dot" onclick="currentSlide(10)"></span>
             </div>
         </div>
     </section>
@@ -551,7 +1674,7 @@
             <div class="footer-content">
                 <div class="footer-column">
                     <div class="footer-logo">
-                        <img src="images/logo.png" alt="CAExam - Best CA Test Series" class="logo">
+                        <img src="https://placehold.co/150x40/0052cc/white?text=CAExam" alt="CAExam - Best CA Test Series" class="logo">
                         <p>India's leading CA Test Series platform offering exam-pattern mock tests, detailed solutions, performance analytics, and All India Ranking. Trusted by 25,000+ CA aspirants across India.</p>
                     </div>
                 </div>
@@ -574,7 +1697,7 @@
                         <li><a href="#pricing">CA Intermediate Test Series</a></li>
                         <li><a href="#pricing">CA Final Test Series</a></li>
                         <li><a href="#free-tests">Free Test Series</a></li>
-                        <li><a href="student-dashboard.html">Student Dashboard</a></li>
+                        <li><a href="#free-tests">Student Dashboard</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
@@ -596,7 +1719,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2023 CAExam. All rights reserved. | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a> | <a href="refund.html">Refund Policy</a></p>
+                <p>&copy; 2023 CAExam. All rights reserved. | <a href="#footer">Privacy Policy</a> | <a href="#footer">Terms of Service</a> | <a href="#footer">Refund Policy</a></p>
             </div>
         </div>
     </footer>
@@ -628,7 +1751,7 @@
         </div>
     </div>
 
-    <!-- Buy Now Modal -->
+    <!-- Buy Now Modal - Improved Styling -->
     <div id="buyNowModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -636,13 +1759,23 @@
                 <span class="close" id="closeBuyModal">&times;</span>
             </div>
             <div class="modal-body">
-                <p>If you want to buy this pack, pay via PhonePe, Google Pay, or Paytm to 8949646566 and send the screenshot to this number. After confirming your payment, we will send the latest test series to your WhatsApp number and email ID within 1 hour.</p>
+                <div class="payment-instructions">
+                    <p>To purchase your selected plan, please follow these steps:</p>
+                    
+                    <div class="payment-info">
+                        <p><i class="fas fa-money-bill-wave"></i> <strong>Amount to Pay:</strong> <span id="paymentAmount">₹199</span></p>
+                        <p><i class="fas fa-mobile-alt"></i> <strong>Payment Number:</strong> +91 8949646566</p>
+                        <p><i class="fas fa-qrcode"></i> <strong>Payment Methods:</strong> PhonePe, Google Pay, or Paytm</p>
+                    </div>
+                    
+                    <p>After making the payment, please send the screenshot of the transaction to the same number via WhatsApp. We will activate your test series within 1 hour of payment confirmation.</p>
+                </div>
                 <button class="btn btn-primary" id="closeBuyBtn">Close</button>
             </div>
         </div>
     </div>
 
-    <!-- Login/Register Modal (Kept for demo) -->
+    <!-- Login/Register Modal -->
     <div id="loginModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -697,6 +1830,335 @@
     </div>
 
     <!-- JavaScript -->
-    <script src="script.js"></script>
+    <script>
+        // DOM Ready - Ensures everything loads first
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM Loaded - Script starting'); // Debug: Confirm JS runs
+            
+            // Mobile Navigation
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('nav-menu');
+            
+            if (hamburger && navMenu) {
+                hamburger.addEventListener('click', function() {
+                    hamburger.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+            }
+            
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (hamburger && navMenu) {
+                        hamburger.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    }
+                });
+            });
+            
+            // Login Modal
+            const loginBtn = document.getElementById('loginBtn');
+            const loginModal = document.getElementById('loginModal');
+            const closeModal = document.getElementById('closeModal');
+            
+            if (loginBtn && loginModal) {
+                loginBtn.addEventListener('click', function() {
+                    loginModal.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+            
+            if (closeModal && loginModal) {
+                closeModal.addEventListener('click', function() {
+                    loginModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                });
+            }
+            
+            window.addEventListener('click', function(event) {
+                if (event.target === loginModal) {
+                    loginModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Tab Switching in Modal
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const tab = this.getAttribute('data-tab');
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    document.getElementById(tab).classList.add('active');
+                });
+            });
+            
+            // Pricing Tabs
+            const pricingTabs = document.querySelectorAll('.pricing-tab');
+            const pricingPanels = document.querySelectorAll('.pricing-panel');
+            
+            pricingTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const target = this.getAttribute('data-target');
+                    pricingTabs.forEach(t => t.classList.remove('active'));
+                    pricingPanels.forEach(p => p.classList.remove('active'));
+                    this.classList.add('active');
+                    document.getElementById(`panel-${target}`).classList.add('active');
+                    document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+            
+            // Testimonial Slider
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.testimonial-slide');
+            const dots = document.querySelectorAll('.dot');
+            
+            function showSlide(n) {
+                slides.forEach(slide => slide.classList.remove('active'));
+                dots.forEach(dot => dot.classList.remove('active'));
+                if (n >= slides.length) currentSlide = 0;
+                if (n < 0) currentSlide = slides.length - 1;
+                slides[currentSlide].classList.add('active');
+                dots[currentSlide].classList.add('active');
+            }
+            
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', function() {
+                    currentSlide = index;
+                    showSlide(currentSlide);
+                });
+            });
+            
+            setInterval(function() {
+                currentSlide++;
+                showSlide(currentSlide);
+            }, 5000);
+            
+            // Free Test/Free Pack Buttons - Open Modal (With Debug)
+            const startTestBtns = document.querySelectorAll('.start-test-btn');
+            const freePackBtns = document.querySelectorAll('.free-pack-btn');
+            const freeFormModal = document.getElementById('freeFormModal');
+            const closeFreeModal = document.getElementById('closeFreeModal');
+            const freeForm = document.getElementById('freeForm');
+            
+            console.log('Debug - Start Test Buttons found:', startTestBtns.length); // Should be 3
+            console.log('Debug - Free Pack Buttons found:', freePackBtns.length); // Should be 3
+            console.log('Debug - Free Modal found:', !!freeFormModal); // true
+            console.log('Debug - Free Form found:', !!freeForm); // true
+            
+            if (!freeFormModal) {
+                console.error('ERROR: freeFormModal not found in HTML!');
+                return;
+            }
+            
+            // Start Test Buttons
+            startTestBtns.forEach((btn, index) => {
+                console.log('Debug - Attaching to Start Test Btn', index + 1);
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const level = this.getAttribute('data-level');
+                    console.log('Debug - Start Test clicked for:', level);
+                    
+                    freeForm.setAttribute('data-level', level || 'General');
+                    freeFormModal.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                    console.log('Debug - Modal opened for Start Test');
+                });
+            });
+            
+            // Free Pack Buttons
+            freePackBtns.forEach((btn, index) => {
+                console.log('Debug - Attaching to Free Pack Btn', index + 1);
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const level = this.getAttribute('data-level');
+                    console.log('Debug - Free Pack clicked for:', level);
+                    
+                    freeForm.setAttribute('data-level', level || 'General');
+                    freeFormModal.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                    console.log('Debug - Modal opened for Free Pack');
+                });
+            });
+            
+            // Close Free Modal
+            if (closeFreeModal) {
+                closeFreeModal.addEventListener('click', function() {
+                    console.log('Debug - Close Free Modal clicked');
+                    freeFormModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                });
+            }
+            
+            window.addEventListener('click', function(event) {
+                if (event.target === freeFormModal) {
+                    console.log('Debug - Outside click closing Free Modal');
+                    freeFormModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Free Form Submission
+            const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxV7oxD1N4pwmsX2stdEizJIApNF7btFRLKSfgXqK7OTV7wlUeU1UPjD739Jcsi4kTW/exec';
+            
+            if (freeForm) {
+                freeForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const formData = new FormData(this);
+                    const level = this.getAttribute('data-level') || 'General';
+                    
+                    const params = new URLSearchParams();
+                    for (let [key, value] of formData.entries()) {
+                        params.append(key, value);
+                    }
+                    
+                    const submitBtn = this.querySelector('button[type="submit"]');
+                    const originalText = submitBtn.innerHTML;
+                    submitBtn.innerHTML = 'Submitting...';
+                    submitBtn.disabled = true;
+                    
+                    console.log('Debug - Form data:', params.toString());
+                    
+                    fetch(SCRIPT_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                        },
+                        body: params
+                    })
+                    .then(response => {
+                        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                        console.log('Debug - Response status:', response.status);
+                        return response.text();
+                    })
+                    .then(data => {
+                        console.log('Debug - Response data:', data);
+                        
+                        if (data.trim() === 'Success') {
+                            const downloadLink = document.createElement('a');
+                            downloadLink.href = 'https://drive.google.com/uc?export=download&id=1ztptHMUr3KXA_vq8It1bGsDQrc8d5rNG';
+                            downloadLink.download = `CA-${level}-Free-Test-Pack.pdf`;
+                            document.body.appendChild(downloadLink);
+                            downloadLink.click();
+                            document.body.removeChild(downloadLink);
+                            
+                            alert(`Thank you! ${level} details submitted. PDF downloading.`);
+                            freeForm.reset();
+                            freeFormModal.style.display = 'none';
+                            document.body.style.overflow = 'auto';
+                        } else {
+                            alert('Failed: ' + data.trim());
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Debug - Error:', error);
+                        alert('Error: ' + error.message);
+                    })
+                    .finally(() => {
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    });
+                });
+            }
+            
+            // Buy Now Modal
+            const buyNowBtns = document.querySelectorAll('.buy-now-btn');
+            const buyNowModal = document.getElementById('buyNowModal');
+            const closeBuyModal = document.getElementById('closeBuyModal');
+            const closeBuyBtn = document.getElementById('closeBuyBtn');
+            
+            buyNowBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const plan = this.getAttribute('data-plan');
+                    const level = this.getAttribute('data-level');
+                    let amount = '₹199';
+                    
+                    if (plan === 'gold') {
+                        amount = '₹999';
+                    }
+                    
+                    document.getElementById('paymentAmount').textContent = amount;
+                    buyNowModal.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            [closeBuyModal, closeBuyBtn].forEach(el => {
+                if (el && buyNowModal) {
+                    el.addEventListener('click', function() {
+                        buyNowModal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    });
+                }
+            });
+            
+            window.addEventListener('click', function(event) {
+                if (event.target === buyNowModal) {
+                    buyNowModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Coupon Copy
+            const copyCouponBtn = document.getElementById('horizontalCouponBtn');
+            if (copyCouponBtn) {
+                copyCouponBtn.addEventListener('click', function() {
+                    const couponCode = 'SAVE100';
+                    navigator.clipboard.writeText(couponCode).then(function() {
+                        const originalText = this.innerHTML;
+                        this.innerHTML = 'Copied!';
+                        setTimeout(() => this.innerHTML = originalText, 2000);
+                    }.bind(this));
+                });
+            }
+            
+            // Smooth Scroll
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    const target = document.querySelector(targetId);
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            });
+            
+            // Other Forms
+            const authForms = document.querySelectorAll('.auth-form');
+            authForms.forEach(form => {
+                if (form.id !== 'freeForm') {
+                    form.addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        alert('Demo form');
+                    });
+                }
+            });
+            
+            // Newsletter Silent Reset
+            const newsletterForm = document.querySelector('.newsletter-form');
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    this.reset();
+                });
+            }
+            
+            console.log('Debug - All scripts loaded'); // End
+        });
+
+        // Testimonial Dots
+        function currentSlide(n) {
+            const slides = document.querySelectorAll('.testimonial-slide');
+            const dots = document.querySelectorAll('.dot');
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            if (slides[n - 1]) slides[n - 1].classList.add('active');
+            if (dots[n - 1]) dots[n - 1].classList.add('active');
+        }
+    </script>
 </body>
 </html>
